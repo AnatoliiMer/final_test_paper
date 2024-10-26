@@ -1,0 +1,10 @@
+anatoli@Django:~$ mkdir Task_2
+anatoli@Django:~$ mv Друзья_человека Task_2/
+anatoli@Django:~$ ls
+ Blog              Task_2             Документы           Изображения    'Рабочий стол'
+ PycharmProjects   Видео              Домашние_животные   Музыка          Шаблоны
+ snap              Вьючные_животные   Загрузки            Общедоступные
+anatoli@Django:~$ cd Task_2
+anatoli@Django:~/Task_2$ ls
+Друзья_человека
+anatoli@Django:~/Task_2$ 
