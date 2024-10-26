@@ -1,0 +1,65 @@
+CREATE TABLE Animals (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    birthDate DATE NOT NULL
+);
+
+CREATE TABLE Pets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    animal_id INT,
+    commands TEXT, -- Хранение списка команд в виде строки (например, через запятую)
+    FOREIGN KEY (animal_id) REFERENCES Animals(id) ON DELETE CASCADE
+);
+
+CREATE TABLE PackAnimals (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    animal_id INT,
+    loadCapacity DOUBLE NOT NULL,
+    FOREIGN KEY (animal_id) REFERENCES Animals(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Dogs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pet_id INT,
+    breed VARCHAR(255) NOT NULL,
+    FOREIGN KEY (pet_id) REFERENCES Pets(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Cats (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pet_id INT,
+    color VARCHAR(50) NOT NULL,
+    FOREIGN KEY (pet_id) REFERENCES Pets(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Hamsters (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pet_id INT,
+    type VARCHAR(50) NOT NULL,
+    FOREIGN KEY (pet_id) REFERENCES Pets(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Horses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pack_animal_id INT,
+    speed DOUBLE NOT NULL,
+    FOREIGN KEY (pack_animal_id) REFERENCES PackAnimals(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Camels (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pack_animal_id INT,
+    humpSize DOUBLE NOT NULL, -- Размер горба
+    age INT NOT NULL,         -- Возраст
+    isTrained BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (pack_animal_id) REFERENCES PackAnimals(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Donkeys (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pack_animal_id INT,
+    strength DOUBLE NOT NULL, -- Сила осла
+    isWorking BOOLEAN NOT NULL DEFAULT FALSE,
+    breed VARCHAR(255) NOT NULL,
+    FOREIGN KEY (pack_animal_id) REFERENCES PackAnimals(id) ON DELETE CASCADE
+);
