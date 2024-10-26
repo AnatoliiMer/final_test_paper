@@ -1,0 +1,16 @@
+DELETE FROM Camels;
+
+CREATE TABLE Equines (
+    id SERIAL PRIMARY KEY,
+    pack_animal_id INT,
+    speed FLOAT,
+    strength FLOAT,
+    isWorking BOOLEAN,
+    breed VARCHAR(255)
+);
+
+INSERT INTO Equines (pack_animal_id, speed) 
+SELECT pack_animal_id, speed FROM Horses;
+
+INSERT INTO Equines (pack_animal_id, strength, isWorking, breed) 
+SELECT pack_animal_id, strength, isWorking, breed FROM Donkeys;

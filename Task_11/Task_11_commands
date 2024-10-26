@@ -1,0 +1,13 @@
+CREATE TABLE YoungAnimals (
+    id SERIAL PRIMARY KEY,
+    animal_id INT,  -- идентификатор животного из исходной таблицы
+    age_months INT  -- возраст в месяцах
+);
+
+INSERT INTO YoungAnimals (animal_id, age_months)
+SELECT id, 
+       EXTRACT(YEAR FROM AGE(CURRENT_DATE, birthDate)) * 12 + 
+       EXTRACT(MONTH FROM AGE(CURRENT_DATE, birthDate))
+FROM Animals
+WHERE AGE(CURRENT_DATE, birthDatee) > INTERVAL '1 year' AND 
+      AGE(CURRENT_DATE, birthDate) < INTERVAL '3 years';

@@ -1,0 +1,55 @@
+CREATE TABLE AllAnimals (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    birthDate DATE,
+    commands TEXT,
+    loadCapacity DOUBLE,
+    breed VARCHAR(255),
+    color VARCHAR(50),
+    type VARCHAR(50),
+    speed FLOAT,
+    strength FLOAT,
+    isWorking BOOLEAN,
+    age_months INT,
+    source_table VARCHAR(50)  -- поле для указания источника
+);
+
+-- Заполнение данными из таблицы Animals и Pets
+INSERT INTO AllAnimals (id, name, birthDate, commands, source_table)
+SELECT a.id, a.name, a.birthDate, p.commands, 'Animals'
+FROM Animals a
+LEFT JOIN Pets p ON a.id = p.animal_id;
+
+-- Заполнение данными из таблицы PackAnimals
+INSERT INTO AllAnimals (id, loadCapacity, source_table)
+SELECT pa.id, pa.loadCapacity, 'PackAnimals'
+FROM PackAnimals pa;
+
+-- Заполнение данными из таблицы Dogs
+INSERT INTO AllAnimals (id, breed, source_table)
+SELECT d.id, d.breed, 'Dogs'
+FROM Dogs d
+JOIN Pets p ON d.pet_id = p.id;
+
+-- Заполнение данными из таблицы Cats
+INSERT INTO AllAnimals (id, color, source_table)
+SELECT c.id, c.color, 'Cats'
+FROM Cats c
+JOIN Pets p ON c.pet_id = p.id;
+
+-- Заполнение данными из таблицы Hamsters
+INSERT INTO AllAnimals (id, type, source_table)
+SELECT h.id, h.type, 'Hamsters'
+FROM Hamsters h
+JOIN Pets p ON h.pet_id = p.id;
+
+-- Заполнение данными из таблицы Equines
+INSERT INTO AllAnimals (id, speed, strength, isWorking, breed, source_table)
+SELECT e.id, e.speed, e.strength, e.isWorking, e.breed, 'Equines'
+FROM Equines e
+JOIN PackAnimals pa ON e.pack_animal_id = pa.id;
+
+-- Заполнение данными из таблицы YoungAnimals
+INSERT INTO AllAnimals (id, age_months, source_table)
+SELECT ya.id, ya.age_months, 'YoungAnimals'
+FROM YoungAnimals ya;
